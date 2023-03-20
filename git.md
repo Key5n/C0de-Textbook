@@ -13,7 +13,26 @@ math: katex
 
 ![w:400 bg left:33%](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
 
-<!-- _footer : ![w:50px](./images/logo_c0de.png) 名古屋工業大学プログラミング部 C0de -->
+<!-- footer : ![w:50px](https://raw.githubusercontent.com/Key5n/C0de-Textbook/Key5n/content/images/logo_c0de.png) 名古屋工業大学プログラミング部 C0de -->
+
+---
+
+<!-- _class: image-one -->
+
+<!-- _header: Gitとは -->
+
+# プログラムの履歴の記録
+
+![w:500px](https://raw.githubusercontent.com/Key5n/C0de-Textbook/Key5n/content/images/version-management.png)
+
+### できること
+
+- ファイル履歴をスマートに管理すること
+  - 右のような例をなくすことができる
+- 昔のバージョンに戻る
+  - 「この実装だめだわ:sob:。戻ろ」
+- スマートな共同開発
+  - ファイルを送りあったりしなくてよい
 
 ---
 
@@ -43,7 +62,9 @@ const users = [
 
 # ソースコード
 
-「わぁ...」「泣いちゃった！」「ふーん」
+なんでやねん:sob:
+
+「わぁ...」「泣いちゃった！」「ふーーーん」「ってコト！？」
 
 ---
 
@@ -51,28 +72,14 @@ const users = [
 
 <!-- _header: Gitとは -->
 
-![](./images/linus.png)
+![](https://raw.githubusercontent.com/Key5n/C0de-Textbook/Key5n/content/images/linus.png)
 
-- フィンランド出身のプログラマ Linus Benedict Torvalds が Linux を開発中に作った分散型ソースコード管理システム
-- あｓｄｊｋｆぁｓｄｌｊふぁあｋｌｓｄ
-- じゃｋｌｓｄｊｆｌ
-- どっこいしょーどっこいしょーどっこいしょーどっこいショーソーランソーランソーランソーランどこいしょー
+- フィンランド出身のプログラマ  
+  Linus が Linux カーネル開発のために作った分散型ソースコード管理システム
+  - じゃｋｌｓｄｊｆｌ
+    - どっこいしょーどっこいしょーどっこいしょーどっこいショーソーランソーランソーランソーランどこいしょー
 
-ど
-
----
-
-# aiueo
-
-<div class="title">
-  <img src="https://3.bp.blogspot.com/-92TzXjouiTg/Wn1VwZIKqzI/AAAAAAABKE4/5WkHr8cgLQoLp7Jul0iqmQ6FHBcdwrDVgCLcBGAs/s800/computer_man2_angry.png" height="400px"/>
-</div>
-
----
-
-<div>
-<h1>a</h1>
-<div class="position-absolute">
-a
-</div>
-</div>
+1. aid
+   1.asdjf
+1. asjdkf
+1. ajsd

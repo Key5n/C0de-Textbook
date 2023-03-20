@@ -1,0 +1,36 @@
+name: Convert To PDF
+on:
+  workflow_dispatch:
+  create:
+  push:
+    branches:
+      - Key5n/main
+      - main
+    # paths:
+    # - "themes/**"
+    # - "images/**"
+    # - "git.md"
+    paths-ignore:
+      - "*.pdf"
+      - "*.png"
+      - "*.jpeg"
+
+jobs:
+  marp:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: convert to pdf
+        run: |-
+          npx -y @marp-team/marp-cli@latest ./git.md -o git.pdf --theme-set themes/style.css
+          npx -y @marp-team/marp-cli@latest --images png git.md --theme-set themes/style.css
+
+      - name: push to the repo
+        run: |-
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "bot: auto generation"
+          git push
