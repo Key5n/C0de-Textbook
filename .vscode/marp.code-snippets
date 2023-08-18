@@ -1,0 +1,17 @@
+{
+  "lead": {
+    "prefix": "lead",
+    "body": ["<!-- _class: lead -->"],
+    "description": "For leading"
+  },
+  "header": {
+    "prefix": "header",
+    "body": ["<!-- _header: $1 -->"],
+    "description": "For header"
+  },
+  "class": {
+    "prefix": "class",
+    "body": ["<!-- _class: $1 -->"],
+    "description": "For class"
+  }
+}
