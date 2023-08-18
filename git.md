@@ -21,14 +21,14 @@ math: katex
 
 # プログラムの履歴の記録
 
-![w:500px](https://raw.githubusercontent.com/Key5n/C0de-Textbook/Key5n/content/images/version-management.png)
+![w:500px](https://raw.githubusercontent.com/Key5n/C0de-Textbook/Key5n/main/images/version-management.png)
 
-### できること
+### :+1: できること
 
-- ファイル履歴をスマートに管理すること
-  - 右のような例をなくすことができる
+- ファイル履歴をスマートに管理
+  - 右のような例をなくすことが可能
 - 昔のバージョンに戻る
-  - 「この実装だめだわ:sob:。戻ろ」
+  - 例：「この実装だめだわ:sob: 戻ろ」
 - スマートな共同開発
   - ファイルを送りあったりしなくてよい
 
@@ -38,10 +38,15 @@ math: katex
 
 <!-- _header: Gitとは -->
 
-![](https://raw.githubusercontent.com/Key5n/C0de-Textbook/Key5n/content/images/linus.png)
+![](https://raw.githubusercontent.com/Key5n/C0de-Textbook/Key5n/main/images/linus.png)
 
 - フィンランド出身のプログラマ  
-  Linus が Linux カーネル開発のために作った分散型ソースコード管理システム
+  - Linus が Linux カーネル開発のために作った分散型ソースコード管理システム
+- Linux カーネルの開発をするために Linus が開発
+  - バージョン管理システムは他にもあるが、Git が最強
+- 個人でも企業でも使用される
+  - Git を用いた開発経験とチーム開発経験は面接で必ず聞かれる
+  （もしくはあるものと思われる）
 
 ---
 
@@ -55,16 +60,15 @@ math: katex
 
 <!-- _header: 使用頻度ランキング（私見） -->
 
-1. add, commit
-1. status
+1. add, commit, status
 1. push
-1. init, log
-1. clone
-1. rm, mv
-1. revert, stash, diff
+1. stash, switch
+1. clone, init
 1. reset
+1. rm, mv
 1. merge
-1. branch, checkout
+1. revert, diff
+1. branch, checkout(今の時代はあまり使われない)
 
 ---
 
@@ -72,18 +76,30 @@ math: katex
 
 <!-- _class: image-one -->
 
-![w:400](https://github.com/Key5n/C0de-Textbook/blob/Key5n/content/images/git-worktree-and-index.png?raw=true)
+![w:400](https://github.com/Key5n/C0de-Textbook/blob/Key5n/main/images/git-worktree-and-index.png?raw=true)
 
-1. git init でローカルリポジトリの初期化
-1. git add で作業ファイルの変更をインデックスに追加
-1. git commit でローカルリポジトリにコミット
-1. git push でリモートリポジトリにプッシュ
+1. `git init`：ローカルリポジトリの初期化
+1. `git add <ファイル名>`
+    - 作業ファイルの変更をインデックスに追加
+    - `git add index.html`, `git add .`
+1. `git commit`
+    - ローカルリポジトリにコミット
+    - `git commit -m "fix: タイポを修正"`
+1. `git push`
+    - リモートリポジトリにプッシュ
+    - `git push origin main`
 
 ---
 
 <!-- _header: 基本的な流れ2/2 -->
 
+<!-- _class: image-one -->
+
+
 ![w:700](https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F284567%2Fc6162ef3-ab22-7062-d9f3-707d999a1a2a.png?ixlib=rb-4.0.0&auto=format&gif-q=60&q=75&w=1400&fit=max&s=2b954ddf8c5c32d79f1bee05762e4321)
+
+A. 
+
 
 ---
 
@@ -101,14 +117,16 @@ math: katex
 <!-- _header: git add -->
 <!-- _class: image-one -->
 
-![w:400](https://github.com/Key5n/C0de-Textbook/blob/Key5n/content/images/git-worktree-and-index.png?raw=true)
+![w:400](https://github.com/Key5n/C0de-Textbook/blob/Key5n/main/images/git-worktree-and-index.png?raw=true)
 
 # ファイルのステージ(stage)
 
 - 使い方
-  - git add .zshrc
-  - git add \*.c
-  - git add images(ディレクトリ名)
+  - `git add .zshrc`
+  - `git add *.c`
+      - zsh の場合 `git add \*.c`
+  - `git add images/` 
+  (ディレクトリのファイルをまとめて)ステージング
 
 ---
 
@@ -116,60 +134,66 @@ math: katex
 
 <!-- _class: image-one -->
 
-![w:400](https://github.com/Key5n/C0de-Textbook/blob/Key5n/content/images/git-worktree-and-index.png?raw=true)
+![w:400](https://github.com/Key5n/C0de-Textbook/blob/Key5n/main/images/git-worktree-and-index.png?raw=true)
 
 # ローカルリポジトリへのファイルのコミット
 
 - 使い方
-  - git commit -m "fix: fixed typo"
-  - git commit --verbose
-- git commit だけだと変な画面:smile:に遷移
+  - `git commit -m "fix: fixed typo"`
+  - `git commit --verbose`(おすすめはしない)
+- `git commit` だけだと変な画面:smile:に遷移
 
 ---
 
+<!-- _header: git commit (余談) -->
+
+<!-- _class: image-one -->
+
+![w:440](https://github.com/Key5n/C0de-Textbook/blob/Key5n/main/images/git-diff.png?raw=true)
+
+#### 野上は `git commit --verbose` を使用
+
+- コミットするものに間違いがないか確認できるから
+    - ただし diff はものすごい見にくい
+    - diff だけは VSCode で見る
+- コミット時に Vim エディタを起動する方法
+    - `git config --global core.editor vim`
+    - 何も設定しないと Nano エディタが起動
+- エイリアス`gc`を追加
+    - `gc='git commit --verbose'`(Linux)
+
+---
 <!-- _header: git status -->
 
 # 状況の表示
 
 - 使い方
-  - git status
+  - `git status`
 - エイリアスを登録しておこう
-
----
-
-<!-- _header: git commit -->
-
-<!-- _class: image-one -->
-
-![w:500](https://github.com/Key5n/C0de-Textbook/blob/Key5n/content/images/git-diff.png?raw=true)
-
-# git commit --verbose を使え
-
-理由
-
-- git commit --verbose は現在のインデックスと前回コミットの差を表示してくれるから
-- 何も設定しないと Vim の画面が表示:blush:
-- エイリアス`gc`を追加
-- `git config --global commit.verbose true`でも可
+    - 野上は `alias gst='git status'`
+- 何かおかしくなったら`git status`を打って、メッセージを読もう
+    - 代替解決方法が書いてある
 
 ---
 
 <!-- _header: コミットメッセージの書き方 -->
 
-# 未来の開発者がわかりやすいように書く
+### コミットメッセージを見て内容が想像できるように書く
 
 例
 
 - docs: ○○ を追記
 - fix: ○○ のバグを直した
-- chore: ワークフローを書き直した
 - feat: ○○ を実装
 
-[参考](https://zenn.dev/itosho/articles/git-commit-message-2023)
+他に
+- [Git のコミットメッセージの書き方](https://zenn.dev/itosho/articles/git-commit-message-2023)
+  （今すぐ読む必要はない。いつか思い出そう）
+- [企業のものを見てみよう](https://github.com/yumemi-inc/android-engineer-codecheck/commits/main)
 
 ---
 
-<!-- _header: 問題1 -->
+<!-- _header: Markdown ファイルをコミットしてみる -->
 
 # ローカルリポジトリにコミット
 
@@ -180,48 +204,97 @@ math: katex
 
 ---
 
-<!-- _header: git log -->
+<!-- _header: 問題1 -->
+
+<!-- _class: src -->
+
+```zsh
+$ git init
+(README.md になにか書く)
+$ git add README.md
+$ git commit -m "docs: README を更新"
+```
+
+# ローカルにコミット
+
+1. 自分でリポジトリを作る(init)
+1. README.md に何か書く
+1. ステージング
+1. コミット
+
+:warning: $ の後ろに文字が実際に打つコマンド
+$ マークは慣習的にターミナルを表すもの
+
+---
+
+<!-- _header: Logを見る (CLI) -->
 
 # コミット履歴の閲覧
 
 - 使い方
-  - git log
-  - git log --graph
+  - `git log`
+  - `git log --graph`
     - 履歴をグラフ化してくれる
     - 現在のブランチの履歴のみ
-    - GUI ソフトが必要？git log --graph --all で充分だよなぁ！？
-  - git log --graph --all
+    - 野上は VSCode の `Git Graph` が好き
+  - `git log --graph --all`
     - すべてのブランチのコミット履歴をグラフとして表示
 
 ---
 
-<!-- _header: コミットを取り消す1 -->
+<!-- _header: Logを見る (GUI) -->
 
-# git revert
+<!-- _class: image-one -->
 
-- 正しくは「取り消したいコミットを打ち消すようなコミットを新しく生成する」
-- マージコミットを取り消したいときは別
-  - `git revert -m [1|2] <commit>`
+![w:500](images/git_graph.png)
+
+方法
+- VSCode 拡張機能 Git Graph
+- Git の GUI
+    - Sourcetree
+    - GitKraken
+
+野上は Git Graph 使ってます
+これで充分
+
 
 ---
 
-<!-- _header: コミットを取り消す2 -->
+<!-- _header: コミットを取り消す(1) ちょっと難しい -->
 
-# git reset
+# git revert とは
+- 「取り消したいコミットを打ち消すようなコミットを新しく生成する」もの
+    - 「歴史をなかったことにする」のではなく、「ここからやり直そう」
+- 「コミットしたけど変なファイル入ってた」はよくあること
+    - これを`revert`を使用して取り消す
 
-- git reset --soft
+(余談)
+- マージコミットを取り消したいときの`revert`は特別
+  - `git revert -m [1|2] <commit>`
+---
 
+<!-- _header: コミットを取り消す(2) 超危険 -->
+
+<!-- _class: src -->
+
+```sh
+# HEAD を移す
+# 直前のコミットはステージング領域へ
+$ git reset --soft HEAD^
+# 上と同義
+$ git reset --soft HEAD~1
+```
+
+### git reset
+
+- `git reset --soft <commit>`
   - HEAD を指定したコミットにリセット
-  - インデックスとワークツリーは無変化
 
-- git reset --mixed
+- `git reset --mixed <commit>`
+  - インデックスもリセット
 
-  - デフォルト
-  - インデックスをリセット
-
-- git reset --hard
+- `git reset --hard <commmit>`
   - インデックスとワークツリーをリセット
-  - コミットしてない変更が消える
 
 ---
 
@@ -258,16 +331,18 @@ math: katex
 
 # コミットに付いたラベル(ポインタ)
 
+![w:500](https://github.com/Key5n/C0de-Textbook/blob/Key5n/main/images/git-branch.png?raw=true)
 - ブランチの切り方
 
-  - git switch -c hoge
-  - git checkout -b
+  - `git switch -c hoge`
+    - おすすめ
+  - `git checkout -b`
+    - 古い書き方
 
 - ブランチの移動の仕方
-  - git switch hoge
-  - git checkout hoge
+  - `git switch hoge`
+  - `git checkout hoge`
 
-![w:500](https://github.com/Key5n/C0de-Textbook/blob/Key5n/content/images/git-branch.png?raw=true)
 
 ---
 
@@ -285,14 +360,14 @@ math: katex
 
 マージしようとしたものがコンフリクトしているとこのように書き込まれる
 
-解消には
+解消の方法
 
 - この\<や\>を消しつつ内容を正しいものに
   修正する
 - ステージングする
 - コミットする
 
-VSCode 上でコンフリクト解消可能
+つまり最終的にあるべきソースコードとなるように変更して、`git add`
 
 ---
 
@@ -345,7 +420,8 @@ VSCode 上でコンフリクト解消可能
 ## git diff
 
 - コミット前にどんな変更があるか確認したい解き
+  - とても見にくいから VSCode の機能がおすすめ
 
 ## git stash
 
-- やべ、この develop ブランチで作業するつもりが main ブランチで作業してたという時
+- **「しまった。develop ブランチで作業するつもりが main ブランチで作業してた」**という時に使用
