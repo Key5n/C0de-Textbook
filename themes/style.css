@@ -111,7 +111,13 @@ footer {
   justify-content: end;
 }
 
-section.src p {
+section.src p,
+section.src h1,
+section.src h2,
+section.src h3,
+section.src h4,
+section.src h5,
+section.src ul {
   width: 60%;
 }
 
