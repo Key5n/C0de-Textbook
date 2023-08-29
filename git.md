@@ -334,17 +334,51 @@ $ git reset --soft HEAD~1
 
 <!-- _header: 演習問題3 -->
 
-# リモートリポジトリへの追加
+<!-- _class: image-one -->
+![w:600](https://github.com/Key5n/C0de-Textbook/blob/Key5n/main/images/git-remote.png?raw=true)
 
-1.Github 上でリポジトリの作成
+### 次のことをやってみよう
 
-1. `git remote -v` で現在のリモートリポジトリの確認
-1. `git remote add origin \<url\>`
-1. `git remote -v` でリモートリポジトリが追加されていることの確認
-1. `git push origin \<今のブランチ名\>`
-1. Github 上でいろいろ見てみよう
-   - コミット履歴
-   - コミットメッセージ
+1. リモートリポジトリにプッシュ
+1. ローカルにコミット
+1. 再度リモートリポジトリにプッシュ
+
+
+ポイント
+1. `git remote -v` でローカルに紐付いているリモートリポジトリが見れる
+1. `git remote add origin <githubのリポジトリのurl>`
+
+---
+
+<!-- _header: 解答例 3 -->
+
+<!-- _class: src -->
+
+```
+# ⚠：すでにローカルにコミットしている状態
+
+# リモートリポジトリの紐付きの確認
+$ git remote -v
+
+# リモートリポジトリの追加の例
+$ git remote add origin https://github.com/*.git
+
+# 現在のブランチ名が main の場合
+$ git push origin main
+
+# 現在のブランチ名が master の場合
+$ git push origin master
+
+# 何か変更を加えてそれを add, commitし、push する
+# GitHub に確認できたら完了
+
+```
+
+### 次のことをやってみよう
+
+1. リモートリポジトリにプッシュ
+1. ローカルにコミット
+1. 再度リモートリポジトリにプッシュ
 
 ---
 
@@ -396,52 +430,32 @@ $ git reset --soft HEAD~1
 
 <!-- _class: image-one -->
 
-![](https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F284567%2Fc6162ef3-ab22-7062-d9f3-707d999a1a2a.png?ixlib=rb-4.0.0&auto=format&gif-q=60&q=75&w=1400&fit=max&s=2b954ddf8c5c32d79f1bee05762e4321)
+![w:300](images/git_merge.png)
+### 新しくブランチを切り、コミットし、GitHub から PR を出す（1人で）
 
-# フォークしてクローンして PR を出そう
-
-1. Github 上でフォークする
-1. git clone \<url\>
-1. 何かしらのブランチを切る
-1. 変更を加える
-1. 自分のリポジトリにプッシュする
-1. PR を出す
+1. `main`から適当にブランチを切る
+1. プッシュする
+1. `main`に Pull Request を出す
+1. 良いと思ったらマージする
 
 ---
 
-<!-- _header: 問題5 -->
-
-# コンフリクトしてみよう
-
-1. ローカルリポジトリとリモートリポジトリの内容を同期
-1. ローカルの内容をいじる
-1. その内容でコミットする
-1. git pull でリモートから引っ張ってくる
-1. コンフリクトするはず
-
----
 
 <!-- _header: .gitignore -->
 
 # 管理したくないものをリストアップ
 
 - 例：\*.local.env
-  - API キーの墓場
 
 ## 注意
 
 一度ステージングしてしまったものを後から`.gitignore`に追加しても意味がない
 
-- git rm --cached hoge
+- `git rm --cached hoge`
 
 ---
 
-<!-- _header: 今日紹介しないけどこんなものもあるよ -->
-
-## git diff
-
-- コミット前にどんな変更があるか確認したい解き
-  - とても見にくいから VSCode の機能がおすすめ
+<!-- _header: 今日紹介しないけど超便利なやつ -->
 
 ## git stash
 
