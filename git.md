@@ -17,7 +17,7 @@ math: katex
 
 <!-- _class: image-one -->
 
-<!-- _header: Gitとは -->
+<!-- _header: Gitとは(1/2) -->
 
 # プログラムの履歴の記録
 
@@ -36,17 +36,15 @@ math: katex
 
 <!-- _class: image-one -->
 
-<!-- _header: Gitとは -->
+<!-- _header: Gitとは(2/2) -->
 
 ![](https://raw.githubusercontent.com/Key5n/C0de-Textbook/Key5n/main/images/linus.png)
 
-- フィンランド出身のプログラマ  
-  - Linus が Linux カーネル開発のために作った分散型ソースコード管理システム
 - Linux カーネルの開発をするために Linus が開発
-  - バージョン管理システムは他にもあるが、Git が最強
 - 個人でも企業でも使用される
-  - Git を用いた開発経験とチーム開発経験は面接で必ず聞かれる
-  （もしくはあるものと思われる）
+  - Git を用いた開発経験とチーム開発経験は面接でよく聞かれる（もしくは当たり前と思われる）
+- 右のおっさんがLinus 
+  - "[NVIDIA は最低の会社。NVIDIA F\*\*K YOU!"](https://www.youtube.com/watch?v=tQIdxbWhHSM)はあまりにも有名
 
 ---
 
@@ -62,43 +60,68 @@ math: katex
 
 1. add, commit, status
 1. push
-1. stash, switch
+1. stash, switch, branch
 1. clone, init
 1. reset
 1. rm, mv
 1. merge
 1. revert, diff
-1. branch, checkout(今の時代はあまり使われない)
+1. checkout(上位互換が現れたためあまり使われない)
 
 ---
 
-<!-- _header: 基本的な流れ1/2 -->
+<!-- _header: 基本的な流れ -ローカルリポジトリで完結する場合- -->
 
 <!-- _class: image-one -->
 
 ![w:400](https://github.com/Key5n/C0de-Textbook/blob/Key5n/main/images/git-worktree-and-index.png?raw=true)
 
-1. `git init`：ローカルリポジトリの初期化
-1. `git add <ファイル名>`
-    - 作業ファイルの変更をインデックスに追加
-    - `git add index.html`, `git add .`
-1. `git commit`
+1. ローカルリポジトリの初期化
+1. ステージング
+    - コミットしたい作業ファイルの変更をインデックスに追加
+1. コミット
     - ローカルリポジトリにコミット
-    - `git commit -m "fix: タイポを修正"`
-1. `git push`
-    - リモートリポジトリにプッシュ
-    - `git push origin main`
+    - イメージは「セーブポイントの作成」
+1. プッシュ
+    - コミットをリモートリポジトリにプッシュ
 
 ---
 
-<!-- _header: 基本的な流れ2/2 -->
+![w:350](https://github.com/Key5n/C0de-Textbook/blob/Key5n/main/images/git_merge.png?raw=true)
+
+<!-- _header: 基本的な流れ -コラボレーターとして開発する場合-  -->
+
+<!-- _class: image-one -->
+
+1. `main`からブランチを切る
+1. プッシュする
+1. `main`に Pull Request を出す
+1. レビューされる
+    - 「ここを直してくれ」
+    - 「ここはどういう意味？」
+1. （承認されたら）マージする
+
+`main`ブランチに直接コミット、プッシュはしない！
+
+
+---
+
+<!-- _header: 基本的な流れ -世界とつながる場合- -->
 
 <!-- _class: image-one -->
 
 
-![w:700](https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F284567%2Fc6162ef3-ab22-7062-d9f3-707d999a1a2a.png?ixlib=rb-4.0.0&auto=format&gif-q=60&q=75&w=1400&fit=max&s=2b954ddf8c5c32d79f1bee05762e4321)
+![w:550](https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F284567%2Fc6162ef3-ab22-7062-d9f3-707d999a1a2a.png?ixlib=rb-4.0.0&auto=format&gif-q=60&q=75&w=1400&fit=max&s=2b954ddf8c5c32d79f1bee05762e4321)
 
-A. 
+A. 誰かのリモートリポジトリ
+B. 自分のリモートリポジトリ
+C. 自分のローカルリポジトリ
+
+**重要ポイント**
+自分のリモートリポジトリから相手のリモートリポジトリに Pull Request を送る
+
+Pull Request:
+ 「こんな変更を加えたので Pull してください」というリクエスト
 
 
 ---
@@ -107,10 +130,11 @@ A.
 
 # リポジトリの新規作成
 
-- `.git`フォルダが作成される
+- `.git/`フォルダが作成される
 - 注意
   - `.github/`と`.git/`は異なるもの
-  - `git clone`した場合は必要ない
+  - `git clone`した場合は`git init`は必要ない
+    - クローンはGitHub から`.git/`をコピーするようなもの
 
 ---
 
@@ -119,14 +143,14 @@ A.
 
 ![w:400](https://github.com/Key5n/C0de-Textbook/blob/Key5n/main/images/git-worktree-and-index.png?raw=true)
 
-# ファイルのステージ(stage)
+## ファイルのステージ(stage)
 
-- 使い方
+- 使い方の例
   - `git add .zshrc`
   - `git add *.c`
-      - zsh の場合 `git add \*.c`
+    - `main.c`や`index.c`など、拡張子が`c`のファイルをすべてステージング
   - `git add images/` 
-  (ディレクトリのファイルをまとめて)ステージング
+    - `images/`下のファイルをすべてステージング
 
 ---
 
@@ -136,12 +160,14 @@ A.
 
 ![w:400](https://github.com/Key5n/C0de-Textbook/blob/Key5n/main/images/git-worktree-and-index.png?raw=true)
 
-# ローカルリポジトリへのファイルのコミット
+### ローカルリポジトリへファイルをコミット
 
-- 使い方
-  - `git commit -m "fix: fixed typo"`
-  - `git commit --verbose`(おすすめはしない)
-- `git commit` だけだと変な画面:smile:に遷移
+- 例
+  1. `git commit -m "fix: fix typo"`
+  2. `git commit --verbose`(おすすめはしない)
+- `git commit` だけだと変な画面()に遷移
+  - ターミナルから Vi や nano といったエディタが開く
+  - 初心者だとこの画面を抜けるだけで大変
 
 ---
 
@@ -169,10 +195,10 @@ A.
 
 - 使い方
   - `git status`
-- エイリアスを登録しておこう
+- エイリアスを登録すると便利
     - 野上は `alias gst='git status'`
 - 何かおかしくなったら`git status`を打って、メッセージを読もう
-    - 代替解決方法が書いてある
+    - だいたい解決方法が書いてある
 
 ---
 
@@ -193,10 +219,11 @@ A.
 
 ---
 
-<!-- _header: Markdown ファイルをコミットしてみる -->
+<!-- _header: 問題1 -->
 
-# ローカルリポジトリにコミット
+### README.mdを作成してコミットしてみよう
 
+内容
 1. 自分でリポジトリを作る(init)
 1. README.md に何か書く
 1. ステージングする
@@ -204,7 +231,7 @@ A.
 
 ---
 
-<!-- _header: 問題1 -->
+<!-- _header: 解答1 -->
 
 <!-- _class: src -->
 
@@ -214,9 +241,7 @@ $ git init
 $ git add README.md
 $ git commit -m "docs: README を更新"
 ```
-
-# ローカルにコミット
-
+内容
 1. 自分でリポジトリを作る(init)
 1. README.md に何か書く
 1. ステージング
@@ -289,10 +314,8 @@ $ git reset --soft HEAD~1
 
 - `git reset --soft <commit>`
   - HEAD を指定したコミットにリセット
-
 - `git reset --mixed <commit>`
   - インデックスもリセット
-
 - `git reset --hard <commmit>`
   - インデックスとワークツリーをリセット
 
@@ -315,10 +338,10 @@ $ git reset --soft HEAD~1
 
 1.Github 上でリポジトリの作成
 
-1. git remote -v で現在のリモートリポジトリの確認
-1. git remote add origin \<url\>
-1. git remote -v でリモートリポジトリが追加されていることの確認
-1. git push origin \<今のブランチ名\>
+1. `git remote -v` で現在のリモートリポジトリの確認
+1. `git remote add origin \<url\>`
+1. `git remote -v` でリモートリポジトリが追加されていることの確認
+1. `git push origin \<今のブランチ名\>`
 1. Github 上でいろいろ見てみよう
    - コミット履歴
    - コミットメッセージ
@@ -333,15 +356,13 @@ $ git reset --soft HEAD~1
 
 ![w:500](https://github.com/Key5n/C0de-Textbook/blob/Key5n/main/images/git-branch.png?raw=true)
 - ブランチの切り方
-
-  - `git switch -c hoge`
-    - おすすめ
-  - `git checkout -b`
-    - 古い書き方
-
+  - おすすめ：`git switch -c hoge`
+    - `-c` は create という意味
+    - ブランチを作成して移動するという意味
+  - 古い書き方：`git checkout -b`
 - ブランチの移動の仕方
-  - `git switch hoge`
-  - `git checkout hoge`
+  - おすすめ：`git switch hoge`
+  - 古い書き方：`git checkout hoge`
 
 
 ---
@@ -424,4 +445,4 @@ $ git reset --soft HEAD~1
 
 ## git stash
 
-- **「しまった。develop ブランチで作業するつもりが main ブランチで作業してた」**という時に使用
+- **「しまった。develop ブランチで作業するつもりが main ブランチで作業してた」**　という時に使用
