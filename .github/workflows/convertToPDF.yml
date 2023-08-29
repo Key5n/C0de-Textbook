@@ -1,13 +1,6 @@
 name: Convert To PDF
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - Key5n/main
-      - main
-    paths-ignore:
-      - "*.png"
-      - "*.jpeg"
 
 jobs:
   marp:
@@ -17,12 +10,22 @@ jobs:
       - name: convert to pdf
         id: convertToPDF
         run: |-
-          npx -y @marp-team/marp-cli@latest ./main.md -o output.pdf --theme-set themes/style.css
+          npx -y @marp-team/marp-cli@latest ./git.md -o output.pdf --theme-set themes/style.css
+          npx -y @marp-team/marp-cli@latest --images png git.md --theme-set themes/style.css
     
       - name: upload as an artifact
         uses: actions/upload-artifact@v3
         if: ${{ steps.convertToPDF.outcome == 'success' }}
         with:
-          name: output
+          name: output_pdf
           path: output.pdf
+          retention-days: 1
+
+      - name: upload images as an artifact
+        uses: actions/upload-artifact@v3
+        if: ${{ steps.convertToPDF.outcome == 'success' }}
+        with:
+          name: output_png
+          path: |
+            *.png
           retention-days: 1
